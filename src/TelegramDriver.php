@@ -299,12 +299,10 @@ class TelegramDriver extends HttpDriver
                 ];
             } else {
                 return collect($button)->map(function($singleButton) {
-                    return [
-                        array_merge([
+                    return array_merge([
                             'text' => (string) $singleButton['text'],
                             'callback_data' => (string) $singleButton['value'],
-                        ], $singleButton['additional']),
-                    ];
+                        ], $singleButton['additional']);
                 })->toArray();
             }
         });
