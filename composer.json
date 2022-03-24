@@ -1,17 +1,17 @@
 {
-    "name": "botman/driver-telegram",
+    "name": "mowemax/driver-telegram",
     "license": "MIT",
-    "description": "Telegram driver for BotMan",
+    "description": "Telegram driver for BotMan with tweaks by MoweMax",
     "keywords": [
         "Bot",
         "BotMan",
         "Telegram"
     ],
-    "homepage": "http://github.com/botman/driver-telegram",
+    "homepage": "http://github.com/mowemax/driver-telegram",
     "authors": [
         {
-            "name": "Marcel Pociot",
-            "email": "m.pociot@gmail.com"
+            "name": "MoweMax",
+            "email": "mm@mowemax.com"
         }
     ],
     "require": {

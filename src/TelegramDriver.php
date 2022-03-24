@@ -290,12 +290,23 @@ class TelegramDriver extends HttpDriver
     private function convertQuestion(Question $question)
     {
         $replies = Collection::make($question->getButtons())->map(function ($button) {
-            return [
-                array_merge([
-                    'text' => (string) $button['text'],
-                    'callback_data' => (string) $button['value'],
-                ], $button['additional']),
-            ];
+            if (isset($button['text'])) {
+                return [
+                    array_merge([
+                        'text' => (string) $button['text'],
+                        'callback_data' => (string) $button['value'],
+                    ], $button['additional']),
+                ];
+            } else {
+                return collect($button)->map(function($singleButton) {
+                    return [
+                        array_merge([
+                            'text' => (string) $singleButton['text'],
+                            'callback_data' => (string) $singleButton['value'],
+                        ], $singleButton['additional']),
+                    ];
+                })->toArray();
+            }
         });
 
         return $replies->toArray();
