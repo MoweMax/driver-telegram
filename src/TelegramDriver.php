@@ -351,6 +351,10 @@ class TelegramDriver extends HttpDriver
          * the text and append the question.
          */
         if ($message instanceof Question) {
+            if (! empty($additionalParameters['mm_action'])) {
+                $this->endpoint           = $additionalParameters['mm_action'];
+                $parameters['message_id'] = $additionalParameters['mm_mid'];
+            }
             $parameters['text'] = $message->getText();
             $parameters['reply_markup'] = json_encode([
                 'inline_keyboard' => $this->convertQuestion($message),
