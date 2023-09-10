@@ -346,15 +346,16 @@ class TelegramDriver extends HttpDriver
             'chat_id' => $recipient,
         ], $additionalParameters + $defaultAdditionalParameters);
 
+         if (! empty($additionalParameters['mm_action'])) {
+            $this->endpoint           = $additionalParameters['mm_action'];
+            $parameters['message_id'] = $additionalParameters['mm_mid'];
+        }
+        
         /*
          * If we send a Question with buttons, ignore
          * the text and append the question.
          */
         if ($message instanceof Question) {
-            if (! empty($additionalParameters['mm_action'])) {
-                $this->endpoint           = $additionalParameters['mm_action'];
-                $parameters['message_id'] = $additionalParameters['mm_mid'];
-            }
             $parameters['text'] = $message->getText();
             $parameters['reply_markup'] = json_encode([
                 'inline_keyboard' => $this->convertQuestion($message),
